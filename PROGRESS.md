@@ -21,6 +21,8 @@ bun tools/check-layout.mjs
 
 同日机械检查通过：`PSTACK_SRC` 指向该提交时，47 个技能与 23 个剧本都有锚点；epubcheck 无错误无警告；390px 无横向溢出；PDF 407 页，抽文本无 Hangul、无 U+2014、无替换字符。正文由 AI 对照英文写成，未经人工逐句审校，仍可能有错误。
 
+完整提交在 Origin 的 `main`。私有 GitHub 仓库 `dulk-dev/pstack-guide-zh` 已创建，但 API 上传没有把大文件完整写入，不要把它当作全文副本。
+
 ## 章列表
 
 状态：todo、drafted（初稿）、checked（已通过上述机械检查。不表示人工逐句审校完成）。

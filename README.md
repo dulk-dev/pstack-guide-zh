@@ -95,7 +95,9 @@ bun tools/check-layout.mjs
 
 ## 仓库
 
-`gh` 命令行未登录。私有 GitHub 仓库已通过 API 建在 [dulk-dev/pstack-guide-zh](https://github.com/dulk-dev/pstack-guide-zh)。本环境提供的私有 Origin 仓库的 `main` 含完整历史，包括 EPUB、PDF 和六张插图。提交作者是 Chaochun。GitHub 上的 `main` 写入同一份文本与构建脚本。
+`gh` 命令行未登录，本环境也不能用 Git 凭据推送到 GitHub。私有仓库已通过 API 建在 [dulk-dev/pstack-guide-zh](https://github.com/dulk-dev/pstack-guide-zh)。完整内容在本环境提供的私有 Origin 仓库的 `main`，包括稿件、六张插图、EPUB 和 PDF。提交作者是 Chaochun。
+
+GitHub 上的 `main` 只有经 API 写入的前面若干文本文件，其中 `manuscript/22-ch-playbooks-work.md` 被截断，不是全文。请以 Origin 的 `main` 为准。把这份完整历史推到 GitHub 时，在已登录 `gh` 的机器上执行 `git remote add github https://github.com/dulk-dev/pstack-guide-zh.git` 然后 `git push -u github main`。若 GitHub 上已有截断提交，需要先决定是否用这份历史覆盖。
 
 署名与插图来源见 [NOTICE.md](NOTICE.md)、[SOURCE.md](SOURCE.md) 和 [manuscript/94-app-attribution.md](manuscript/94-app-attribution.md)。
 
