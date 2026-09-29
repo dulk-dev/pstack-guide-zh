@@ -1,0 +1,43 @@
+/* PDF only. Loaded after fonts.css. Page size is 152 x 225 mm. */
+:root { --serif: "Noto Serif SC", serif; --sans: "Noto Sans SC", sans-serif; --mono: "JetBrains Mono", "Noto Sans SC", monospace; }
+@page {
+  size: 152mm 225mm;
+  margin: 20mm 17mm 22mm 17mm;
+  @bottom-center { content: counter(page); font-family: var(--sans); font-size: 8.5pt; color: #555; }
+  @top-center { content: string(running); font-family: var(--sans); font-size: 8pt; color: #777; }
+}
+@page :first { @bottom-center { content: none; } @top-center { content: none; } }
+@page cover { margin: 0; @bottom-center { content: none; } @top-center { content: none; } }
+@page blank { @bottom-center { content: none; } @top-center { content: none; } }
+body { font-family: var(--serif); font-size: 9.6pt; }
+h1 { string-set: running content(); }
+section.ch, section.app, section.front { break-before: page; }
+section.part { break-before: page; break-after: page; }
+section.part h1 { string-set: running content(); }
+section.cover { page: cover; break-after: page; margin: 0; padding: 0; }
+section.cover img { width: 152mm; height: 225mm; display: block; }
+h1 { font-size: 20pt; }
+h2 { font-size: 14pt; break-after: avoid; }
+h3 { font-size: 11.5pt; break-after: avoid; }
+h4 { break-after: avoid; }
+nav.toc { break-before: page; }
+nav.toc h1 { break-before: auto; }
+nav.toc ol { list-style: none; padding-left: 0; }
+nav.toc ol ol { padding-left: 1.4em; }
+nav.toc li { margin: 0.15em 0; }
+nav.toc a { text-decoration: none; }
+nav.toc a { display: flex; align-items: baseline; gap: 0.3em; }
+nav.toc .toc-dots { flex: 1; border-bottom: 1px dotted #888; transform: translateY(-0.25em); }
+nav.toc .toc-num { flex: none; white-space: nowrap; font-family: var(--sans); font-size: 0.9em; min-width: 1.6em; text-align: right; }
+nav.toc li.part-entry > a { font-family: var(--sans); font-weight: 700; margin-top: 0.6em; display: block; }
+nav.toc li.part-entry > a .toc-dots, nav.toc li.part-entry > a .toc-num { display: none; }
+nav.toc li.part-entry { margin-top: 0.7em; }
+pre { font-size: 7.8pt; }
+code { font-size: 0.86em; }
+table { font-size: 8.4pt; }
+figure.flow svg { max-width: 430px; }
+/* Playbook and principle chapters carry many small tables. */
+section#ch-playbooks-work td, section#ch-playbooks-work th,
+section#ch-playbooks-pr td, section#ch-playbooks-pr th,
+section#ch-playbooks-long td, section#ch-playbooks-long th,
+section#ch-principles td, section#ch-principles th { padding: 0.18em 0.5em; line-height: 1.55; }
