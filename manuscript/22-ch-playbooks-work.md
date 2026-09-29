@@ -4,7 +4,7 @@
 
 剧本清单在 {{src:skills/poteto-mode/SKILL.md}}。跨很多调用点的迁移、分成许多部分的大改动，或者人离开后才回来看的工作，即使较窄的 Feature 也能套上，仍走 [`figure-it-out`](arena-swarm.md#skill-figure-it-out)。没有任何现成剧本合用时也走它。它为这一次运行设计专属步骤。跨天、许多叠放的 PR、一个协调者下面有一大批子代理的常设项目，走 [Orchestrate](playbooks-long.md#playbook-orchestrate)。一个代理在本次会话预算里能做完的，即使措辞像整个项目，也走 [Autonomous run](playbooks-long.md#playbook-autonomous-run)，不走 Orchestrate。
 
-剧本步骤里派出的子代理，`subagent_type` 用 "poteto-agent"，见 [`poteto-agent`](poteto-mode.md#agent-poteto-agent)。`how`、`why`、`interrogate`、`reflect`、`swarm` 若规定了自己的 `subagent_type`，不要改成 `poteto-agent`。每次 Task 默认 `run_in_background: true`。子代理的结果仍由你负责。自己评审 diff，自己写总结，不要把子代理的话原样转交。被打断后续跑会悄悄丢掉指示，把范围收拢后重新派一个。代码类剧本写明的默认模型保持英文 `grok-4.7-xhigh-fast`，可由 [`/setup-pstack`](setup.md#skill-setup-pstack) 的角色行覆盖。没有该行时用这个默认。最难的改动（横切设计、难缠的并发、微妙的算法）改读 `hardest tasks`，默认 `claude-opus-5-5-max`。界面、IDE 或命令行上的操作走匹配的 control 技能。它们属于另一个插件 `cursor-team-kit`：命令行和 TUI 是 `control-cli`，浏览器、Electron 和 Web 界面是 `control-ui`。
+剧本步骤里派出的子代理，`subagent_type` 用 `"poteto-agent"`，见 [`poteto-agent`](poteto-mode.md#agent-poteto-agent)。`how`、`why`、`interrogate`、`reflect`、`swarm` 若规定了自己的 `subagent_type`，不要改成 `poteto-agent`。每次 Task 默认 `run_in_background: true`。子代理的结果仍由你负责。自己评审 diff，自己写总结，不要把子代理的话原样转交。被打断后续跑会悄悄丢掉指示，把范围收拢后重新派一个。代码类剧本写明的默认模型保持英文 `grok-4.7-xhigh-fast`，可由 [`/setup-pstack`](setup.md#skill-setup-pstack) 的角色行覆盖。没有该行时用这个默认。最难的改动（横切设计、难缠的并发、微妙的算法）改读 `hardest tasks`，默认 `claude-opus-5-5-max`。界面、IDE 或命令行上的操作走匹配的 control 技能。它们属于另一个插件 `cursor-team-kit`：命令行和 TUI 是 `control-cli`，浏览器、Electron 和 Web 界面是 `control-ui`。
 
 每个剧本的回复都按模式里的 Writing the reply 来写。句子短，一句一件事。回复本身是文字表面，要经过 [`unslop`](writing.md#skill-unslop)。注释只保留代码看不出来的原因。这条写在模式的 Comments 里，适用于本章会改代码的剧本，包括子代理的 diff。有 PR 时，链接形如 `https://github.com/<owner>/<repo>/pull/<number>`。各节“回应”只补该剧本点名的内容。凡写“运行 Opening a PR”的，步骤在 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr)。那份剧本要求提交前对 diff 运行 `/deslop`，它属于另一个插件 `cursor-team-kit`。
 
@@ -102,7 +102,7 @@ end 结束
 
 1. 在匹配的表面上自己复现，即使某份调试或加仪器的规程让你去请用户复现，也仍由你自己做。操作通过 control 技能。这个技能属于另一个插件 `cursor-team-kit`。命令行和 TUI 用 `control-cli`，浏览器、Electron 和 Web 界面用 `control-ui`。只有在说清一个具体理由、说明这个 control 表面够不到目标，并且你已经把它驱动到所能及的最远处之后，才去问用户。不能直接复现时，不要停。合成触发条件，收紧条件，或加上仪器，直到它发生。
 2. 用二分查找原因。先形成候选假设，再逐个排除，直到只剩一个。用 [`how`](how.md#skill-how) 看受影响的子系统，用 [`why`](why.md#skill-why) 看回归历史，以此给假设做种子。每一轮都取能切掉最多剩余问题空间的那一刀，拿到运行时证据，然后排除。程序状态不清楚时，加仪器或日志，在代码运行时读它。原文禁止猜测。漫长或顽固的追查用 Cursor 的 `/loop`。在进入第 3 步之前，用运行时证据确认幸存的机制。原文把第 3 步称为 `architect` 与 `interrogate` 的扇出。扇出是把工作并行分出去。
-3. 计划修复。改动越过函数边界时，先走 [`architect`](architect.md#skill-architect)。把实现委托给子代理，使用你配置的 bug-fix 模型，默认 `grok-4.7-xhigh-fast`。`subagent_type` 用 "poteto-agent"。范围要具体。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。
+3. 计划修复。改动越过函数边界时，先走 [`architect`](architect.md#skill-architect)。把实现委托给子代理，使用你配置的 bug-fix 模型，默认 `grok-4.7-xhigh-fast`。`subagent_type` 用 `"poteto-agent"`。范围要具体。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。
 4. 在同一表面上验证。原来的复现现在要通过。结论不明，原文写作 `Inconclusive`，或者错误表面，原文写作 wrong-surface，都不是通过，要标出来。单元测试展示的是分支行为，不是缺陷已经不存在。
 5. 安排提交，使失败的复现先进入 git 历史，修复叠在上面。缺陷有廉价的本地测试路径时，按 [`tdd`](tdd-blast.md#skill-tdd) 的先失败后修复来做。这就是 [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units) 在本剧本里的典型顺序：失败测试在下，修复在上。测试昂贵、偏集成或路径不清楚时，跳过这套节奏。原文 {{src:docs/guide/10-recipes-and-pitfalls.md}} 写明，用脆弱的 mock 硬凑测试，比跑真实命令证明得更少，剧本允许跳过。`tdd` 的节奏是：弄清预期行为、当前行为、受影响路径和最小可观察复现。选最窄的可执行检查。先写会抓住这个缺陷的最小测试，编码的是预期行为。改产品代码之前先跑它，确认它因这个原因失败。再做满足预期的最小产品改动。最后重跑，确认通过。
 6. 运行 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr)。
@@ -200,7 +200,7 @@ when idle. repro first, then fix and verify.
    - `Redundancy`。等待卡在一个慢实例或一次慢尝试上。把工作复制出去，例如副本、对冲请求、推测执行，取最快的结果。轨迹必须显示等待占主导，并且系统还有余量。
    - `Lazy evaluation`。成本落在从未使用或尚未需要的结果上，例如启动路径上的急切初始化、渲染屏幕外的项。把工作推迟到第一次使用。
    - `Scheduling`。工作必须发生，但不必发生在交互的那一刻。把它挪到没人等待的地方：空闲回调、启动后的后台预热、用户到达前的预计算、帧提交后的清理。赢的是感受到的延迟，所以测量交互路径，不测量做完的总工作量。
-3. 按轨迹计划修复。越过函数边界时，先走 [`architect`](architect.md#skill-architect)。把实现委托给子代理，使用你配置的 perf-issue 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 "poteto-agent"。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。评审 diff。再抓一份修复后的轨迹。按 [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units)，每一次尝试都先验证，再试下一次。
+3. 按轨迹计划修复。越过函数边界时，先走 [`architect`](architect.md#skill-architect)。把实现委托给子代理，使用你配置的 perf-issue 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 `"poteto-agent"`。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。评审 diff。再抓一份修复后的轨迹。按 [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units)，每一次尝试都先验证，再试下一次。
 4. 解析并对比产物。JSON 进 sqlite，再做 diff。`Inconclusive` 或 wrong-surface 不是通过，要标出来。
 5. 在 PR 里引用这次测量。
 6. 运行 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr)。
@@ -286,7 +286,7 @@ run a cpu trace and tell me why.
 3. 通过 [`show-me-your-work`](personal.md#skill-show-me-your-work) 打开决策日志。本剧本规定的文件是 `decision.tsv`，每次尝试一行，列是 `id`、`hypothesis`、`change`、`before`、`after`、`delta`、`tests`、`verdict`（`kept` 或 `reverted`）、`note`。每次尝试前先读它。放在树外，并加入 gitignore。
 4. 每条假设都落在第 1 步的结构模型上，点名一个具体机制。原文的例子是 defer X off the boot path because it blocks first paint，也就是把 X 挪出启动路径，因为它挡住了第一次绘制。不要写成“试试给什么加记忆化”。
 5. 循环。每次迭代一条假设。
-   - 把改动交给子代理，使用你配置的 hillclimb 模型，默认 `grok-4.7-xhigh-fast`，范围收紧。`subagent_type` 用 "poteto-agent"。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。你监督并评审 diff，而不是自己把 diff 打出来。这是 [`principle-guard-the-context-window`](principles.md#skill-principle-guard-the-context-window)。有多条彼此独立的假设同时活着时，把它们并行派给子代理，每个占用自己的工作树。这是 [`principle-separate-before-serializing-shared-state`](principles.md#skill-principle-separate-before-serializing-shared-state)。
+   - 把改动交给子代理，使用你配置的 hillclimb 模型，默认 `grok-4.7-xhigh-fast`，范围收紧。`subagent_type` 用 `"poteto-agent"`。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。你监督并评审 diff，而不是自己把 diff 打出来。这是 [`principle-guard-the-context-window`](principles.md#skill-principle-guard-the-context-window)。有多条彼此独立的假设同时活着时，把它们并行派给子代理，每个占用自己的工作树。这是 [`principle-separate-before-serializing-shared-state`](principles.md#skill-principle-separate-before-serializing-shared-state)。
    - 用冻结的装置测改前和改后，并跑回归门。
    - 只有指标的移动超过噪声，并且回归门仍是绿的，才接受。否则把改动全部回退。可能有用的微调不保留。
    - 每个被接受的修复一次提交，只暂存你改过的文件，用 `git add <files>`，不要用 `-A`。无论保留还是回退，都写一行日志。
@@ -517,7 +517,7 @@ end 结束
    - **Independent workstreams.** 互不相交的文件、服务或层可以并行。共享写入要串行。
    - **Shared mutable state.** 默认把目标拆开。这是 [`principle-separate-before-serializing-shared-state`](principles.md#skill-principle-separate-before-serializing-shared-state)。只有真的不变量才串行。
    - **Smallest safe decomposition.** 若一个工作者最好，写出为什么。
-4. 把写代码委托给子代理，使用你配置的 feature 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 "poteto-agent"。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。范围要具体：文件路径，已命名的数据形状及其组织方式，以及成功标准。组织方式按 [`principle-model-the-domain`](principles.md#skill-principle-model-the-domain)，在子代理写逻辑之前选定。用状态机，不用散落的布尔值。用表或注册表，不用分支。用有类型的模型，不用在多个文件里重复同一种形状假设。实现若有多种合法形状，例如错误处理、抽象层、测试结构，改走 [`arena`](arena-swarm.md#skill-arena)，让候选把替代方案摆出来，由交叉裁判守住挑选。这是强制的。不允许用 `skip:` 加理由逃掉。[`principle-laziness-protocol`](principles.md#skill-principle-laziness-protocol) 不能覆盖它。收益是评审分离，不是少写几行。被禁止再派生子代理的那个子代理，用同样的评审分离自己持有 diff，也算满足。不要回复一句“在等”，然后干等嵌套代理。注释按模式的 Comments：只保留代码看不出来的原因。验证或测试脚本不要写分阶段旁白，例如 `// Phase 1: add cards`。用断言或日志字符串记下这一步，例如 `assert(ok, 'persisted across restart')`。这适用于你产出的每个文件，包括被委托者的 diff。改动要像外科手术。从上游派生的文件，先重新对照源再改。共享原语的改进要移植到全部消费者，并逐个验证。勤提交。
+4. 把写代码委托给子代理，使用你配置的 feature 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 `"poteto-agent"`。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。范围要具体：文件路径，已命名的数据形状及其组织方式，以及成功标准。组织方式按 [`principle-model-the-domain`](principles.md#skill-principle-model-the-domain)，在子代理写逻辑之前选定。用状态机，不用散落的布尔值。用表或注册表，不用分支。用有类型的模型，不用在多个文件里重复同一种形状假设。实现若有多种合法形状，例如错误处理、抽象层、测试结构，改走 [`arena`](arena-swarm.md#skill-arena)，让候选把替代方案摆出来，由交叉裁判守住挑选。这是强制的。不允许用 `skip:` 加理由逃掉。[`principle-laziness-protocol`](principles.md#skill-principle-laziness-protocol) 不能覆盖它。收益是评审分离，不是少写几行。被禁止再派生子代理的那个子代理，用同样的评审分离自己持有 diff，也算满足。不要回复一句“在等”，然后干等嵌套代理。注释按模式的 Comments：只保留代码看不出来的原因。验证或测试脚本不要写分阶段旁白，例如 `// Phase 1: add cards`。用断言或日志字符串记下这一步，例如 `assert(ok, 'persisted across restart')`。这适用于你产出的每个文件，包括被委托者的 diff。改动要像外科手术。从上游派生的文件，先重新对照源再改。共享原语的改进要移植到全部消费者，并逐个验证。勤提交。
 5. 在匹配的表面上验证。`Inconclusive` 或 wrong-surface 不是通过，要标出来。若这一步落在界面、IDE 或命令行上，匹配的 control 技能属于另一个插件 `cursor-team-kit`。
 6. 用 rebase 收成小而有序的提交。后续工作叠上去。按 [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units)，每一小段都先构建、验证、提交，再做下一段。
 7. 设计有争议时，交付前走 [`interrogate`](interrogate.md#skill-interrogate)。
@@ -613,7 +613,7 @@ end 结束
 2. 按 [`principle-model-the-domain`](principles.md#skill-principle-model-the-domain) 点名代码缺的那种结构。形状已经清楚而且局部时，乏味的代码留着。重塑必须删掉分支或不合法状态，不是再加一层间接。
 3. 点名目标形状。写出假如今天来建，模块布局、类型和调用图应该是什么样。这是 [`principle-foundational-thinking`](principles.md#skill-principle-foundational-thinking) 和 [`principle-redesign-from-first-principles`](principles.md#skill-principle-redesign-from-first-principles)。目标越过函数边界时，在搬动之前用 [`architect`](architect.md#skill-architect) 并行探索这个形状。
 4. 先减再加。引入新形状之前，删掉死代码，折掉只有一个调用者的包装，去掉重复的校验器，移除孤儿引用。这是 [`principle-subtract-before-you-add`](principles.md#skill-principle-subtract-before-you-add)。到达目标形状的最小改动才提交。这是 [`principle-laziness-protocol`](principles.md#skill-principle-laziness-protocol)。可能有用的推测性清理要回退。
-5. 以保持行为的小步来搬，每一步都让钉子保持绿色。API 重塑时，在同一波里迁完全部调用者并删掉旧 API。这是 [`principle-migrate-callers-then-delete-legacy-apis`](principles.md#skill-principle-migrate-callers-then-delete-legacy-apis)。不要兼容垫片，不要新旧路径并行。每一个重命名都对照真实文件抽查。重命名会静默漏掉字符串、散文和反向引用里的用法。机械编辑委托给子代理，使用你配置的 refactoring 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 "poteto-agent"。范围要具体：文件路径、被移动的名字、必须守住的行为。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。
+5. 以保持行为的小步来搬，每一步都让钉子保持绿色。API 重塑时，在同一波里迁完全部调用者并删掉旧 API。这是 [`principle-migrate-callers-then-delete-legacy-apis`](principles.md#skill-principle-migrate-callers-then-delete-legacy-apis)。不要兼容垫片，不要新旧路径并行。每一个重命名都对照真实文件抽查。重命名会静默漏掉字符串、散文和反向引用里的用法。机械编辑委托给子代理，使用你配置的 refactoring 模型，默认 `grok-4.7-xhigh-fast`，`subagent_type` 用 `"poteto-agent"`。范围要具体：文件路径、被移动的名字、必须守住的行为。最难的改动改读 `hardest tasks`，默认 `claude-opus-5-5-max`。
 6. 在真实产物上证明行为没变。能编译不算证明。这是 [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works)。较大的重塑要做等价性检查：一段对比新旧输出的脚本，一段把录下的基线重放到新代码上的过程，或通过相关 control 技能在匹配表面上做一次冒烟运行。这段脚本的文件名原文没有规定。control 技能属于另一个插件 `cursor-team-kit`。命令行和 TUI 用 `control-cli`，浏览器、Electron 和 Web 界面用 `control-ui`。
 7. 确认这次改动值得留。成功的度量是读者负担下降。这是 [`principle-minimize-reader-load`](principles.md#skill-principle-minimize-reader-load)。diff 若没有在某处降低读者负担，就回退。
 8. 用 rebase 收成小而有序的提交。先是一次减法提交，然后是重塑，然后是后续清理。用 [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units) 来整形，使每一段保持行为的切片在下一段之前仍是绿的。运行 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr)。
