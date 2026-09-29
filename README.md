@@ -93,13 +93,15 @@ bun tools/check-layout.mjs
 
 `bun tools/build.mjs epub` 只产 EPUB。`bun tools/build.mjs pdf` 只产 PDF。
 
-## 仓库
+## 下载
 
-`gh` 命令行未登录，本环境也不能用 Git 凭据推送到 GitHub。私有仓库在 [dulk-dev/pstack-guide-zh](https://github.com/dulk-dev/pstack-guide-zh)。稿件、`tools/` 和样式表的 blob 已经与 Origin `main` 上的对应文件一致，包括 `manuscript/22-ch-playbooks-work.md`（75606 字节）、`manuscript/23-ch-playbooks-pr.md`（47595 字节）和 `manuscript/24-ch-playbooks-long.md`（94019 字节）。GitHub 上没有 `dist/`，也没有 `manuscript/images/`。那边的提交是 API 逐文件写入的，不是 Origin 的同一串提交。要让 GitHub `main` 的历史和二进制文件与 Origin 相同，在已登录 `gh` 的机器上执行 `git remote add github https://github.com/dulk-dev/pstack-guide-zh.git`，然后 `git push -u github main --force`。
+预构建的 EPUB / PDF 在 [`dist/`](dist/)，也发布在本仓库的 [Releases](https://github.com/dulk-dev/pstack-guide-zh/releases)。
 
-署名与插图来源见 [NOTICE.md](NOTICE.md)、[SOURCE.md](SOURCE.md) 和 [manuscript/94-app-attribution.md](manuscript/94-app-attribution.md)。
+## 署名与插图
 
-六张插图在 `manuscript/images/`，来自固定提交的 `pstack/docs/guide/images/`。若某一副本缺少这些二进制文件或 `dist/`，把那六张图复制到 `manuscript/images/` 后执行下面的构建即可重新得到 EPUB 和 PDF。
+署名与许可证细节见 [NOTICE.md](NOTICE.md)、[SOURCE.md](SOURCE.md) 和 [manuscript/94-app-attribution.md](manuscript/94-app-attribution.md)。
+
+六张插图在 `manuscript/images/`，来自固定提交的 `pstack/docs/guide/images/`（宽约 1000px）。若缺图或缺 `dist/`，按上文「怎样构建」重新生成即可。
 
 ## 许可证
 
