@@ -95,9 +95,7 @@ bun tools/check-layout.mjs
 
 ## 仓库
 
-`gh` 命令行未登录，本环境也不能用 Git 凭据推送到 GitHub。私有仓库已通过 API 建在 [dulk-dev/pstack-guide-zh](https://github.com/dulk-dev/pstack-guide-zh)。完整内容在本环境提供的私有 Origin 仓库的 `main`，包括稿件、六张插图、EPUB 和 PDF。提交作者是 Chaochun。
-
-GitHub 上的 `main` 只有经 API 写入的前面若干文本文件，其中 `manuscript/22-ch-playbooks-work.md` 被截断，不是全文。请以 Origin 的 `main` 为准。把这份完整历史推到 GitHub 时，在已登录 `gh` 的机器上执行 `git remote add github https://github.com/dulk-dev/pstack-guide-zh.git` 然后 `git push -u github main`。若 GitHub 上已有截断提交，需要先决定是否用这份历史覆盖。
+`gh` 命令行未登录，本环境也不能用 Git 凭据推送到 GitHub。私有仓库在 [dulk-dev/pstack-guide-zh](https://github.com/dulk-dev/pstack-guide-zh)。稿件、`tools/` 和样式表的 blob 已经与 Origin `main` 上的对应文件一致，包括 `manuscript/22-ch-playbooks-work.md`（75606 字节）、`manuscript/23-ch-playbooks-pr.md`（47595 字节）和 `manuscript/24-ch-playbooks-long.md`（94019 字节）。GitHub 上没有 `dist/`，也没有 `manuscript/images/`。那边的提交是 API 逐文件写入的，不是 Origin 的同一串提交。要让 GitHub `main` 的历史和二进制文件与 Origin 相同，在已登录 `gh` 的机器上执行 `git remote add github https://github.com/dulk-dev/pstack-guide-zh.git`，然后 `git push -u github main --force`。
 
 署名与插图来源见 [NOTICE.md](NOTICE.md)、[SOURCE.md](SOURCE.md) 和 [manuscript/94-app-attribution.md](manuscript/94-app-attribution.md)。
 
